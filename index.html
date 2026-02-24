@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Spelling Bee">
+<title>Spelling Bee</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{height:100%}
+body{
+  font-family:-apple-system,system-ui,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  min-height:100%;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(145deg,#FFF3E0 0%,#E8F5E9 50%,#E3F2FD 100%);
+  padding:16px;
+  -webkit-user-select:none;user-select:none;
+  -webkit-tap-highlight-color:transparent;
+}
+.card{
+  width:100%;max-width:420px;
+  background:rgba(255,255,255,0.93);
+  border-radius:22px;padding:26px 20px;
+  box-shadow:0 4px 24px rgba(0,0,0,0.07);
+}
+.logo{display:flex;align-items:center;gap:10px;justify-content:center;margin-bottom:4px}
+.title{
+  font-size:28px;font-weight:900;
+  background:linear-gradient(135deg,#FF6B6B,#6C5CE7);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;color:transparent;
+}
+.sub{color:#636e72;font-size:14px;text-align:center;line-height:1.5;margin:4px 0 14px}
+.wl{
+  background:#f8f9fa;border-radius:14px;padding:12px 14px;margin-bottom:16px;
+  columns:2;column-gap:10px;
+}
+.wl .w{font-size:14px;font-weight:700;color:#2d3436;padding:2px 0;break-inside:avoid}
+.wl .w b{color:#b2bec3;font-weight:600;font-size:11px;margin-right:3px}
+.srow{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.srow:last-child{margin-bottom:0}
+.slbl{font-weight:800;font-size:12px;color:#636e72;min-width:42px}
+select{flex:1;padding:6px 8px;border-radius:8px;border:1.5px solid #dfe6e9;font-size:13px;font-family:inherit;background:#fff}
+input[type=range]{flex:1;accent-color:#6C5CE7}
+.sv{font-size:12px;font-weight:800;color:#6C5CE7;min-width:38px;text-align:right}
+.inf{font-size:11px;color:#b2bec3;width:100%;margin-bottom:4px}
+.bp{
+  width:100%;padding:15px 20px;font-size:17px;font-weight:800;
+  font-family:inherit;color:#fff;
+  background:linear-gradient(135deg,#FF6B6B,#ee5a24);
+  border:none;border-radius:14px;cursor:pointer;
+  box-shadow:0 4px 14px rgba(255,107,107,0.3);
+  transition:transform 0.1s;
+}
+.bp:active{transform:scale(0.97)}
+.bs{
+  padding:12px 22px;font-size:15px;font-weight:700;font-family:inherit;
+  color:#6C5CE7;background:#f0edff;border:2px solid #6C5CE7;
+  border-radius:12px;cursor:pointer;
+}
+.bt{padding:5px 10px;font-size:12px;font-weight:700;color:#fff;background:#6C5CE7;border:none;border-radius:8px;cursor:pointer}
+.pt{height:7px;background:#eee;border-radius:7px;overflow:hidden;margin:14px 0 5px}
+.pf{height:100%;background:linear-gradient(90deg,#4ECDC4,#6C5CE7);border-radius:7px;transition:width 0.4s}
+.pl{text-align:center;font-size:14px;font-weight:700;color:#636e72;margin:0 0 14px}
+.qb{
+  background:linear-gradient(135deg,#f8f9fa,#fff);border-radius:18px;
+  padding:34px 16px;display:flex;align-items:center;justify-content:center;
+  min-height:125px;box-shadow:inset 0 2px 6px rgba(0,0,0,0.03);margin-bottom:16px;
+  flex-direction:column;gap:10px;
+}
+.qb .qi{font-size:50px}
+.qb .ql{font-size:19px;font-weight:700;color:#6C5CE7}
+.qb .cn{font-size:50px;font-weight:900;color:#FF6B6B}
+.qb .cs{font-size:14px;color:#636e72;font-weight:600}
+.qb .ri{font-size:38px}
+.qb .rt{font-size:16px;font-weight:700;color:#2d3436}
+.cc{display:flex;justify-content:center;align-items:center;gap:16px;margin-bottom:12px}
+.cr{
+  width:50px;height:50px;border-radius:50%;border:2px solid #dfe6e9;
+  background:#fff;font-size:21px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:transform 0.1s;
+}
+.cr:active{transform:scale(0.93)}
+.cr:disabled{opacity:0.3}
+.crp{
+  padding:13px 26px;border-radius:50px;border:none;
+  background:linear-gradient(135deg,#6C5CE7,#a29bfe);
+  color:#fff;font-size:16px;font-weight:800;cursor:pointer;
+  box-shadow:0 4px 14px rgba(108,92,231,0.3);
+  transition:transform 0.1s;
+}
+.crp:active{transform:scale(0.95)}
+.ex{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:4px}
+.sm{
+  padding:8px 14px;border-radius:10px;border:1.5px solid #dfe6e9;
+  background:#fff;font-size:13px;font-weight:700;cursor:pointer;color:#2d3436;
+  transition:transform 0.1s;
+}
+.sm:active{transform:scale(0.95)}
+.hd{display:none!important}
+.tc{text-align:center}
+.warn{color:#e17055;font-weight:700;font-size:13px;text-align:center;margin:10px 0}
+</style>
+</head>
+<body>
+
+<div class="card" id="s0">
+  <div class="logo">
+    <span style="font-size:34px">&#x1F41D;</span>
+    <h1 class="title">Spelling Bee</h1>
+  </div>
+  <p class="sub" id="wcount">This week's words</p>
+  <div class="wl" id="wlist"></div>
+  <div class="srow">
+    <label class="slbl">Voice</label>
+    <select id="vsel"><option value="">Loading...</option></select>
+    <button class="bt" id="btest">Test</button>
+  </div>
+  <div class="inf" id="vinfo">Loading voices...</div>
+  <div class="srow">
+    <label class="slbl">Speed</label>
+    <input type="range" id="spd" min="0.5" max="1.2" step="0.05" value="0.8">
+    <span class="sv" id="spdv">0.80x</span>
+  </div>
+  <div class="srow" style="margin-bottom:14px">
+    <label class="slbl">Pause</label>
+    <select id="psel">
+      <option value="3">3 sec</option>
+      <option value="5" selected>5 sec</option>
+      <option value="8">8 sec</option>
+      <option value="10">10 sec</option>
+      <option value="15">15 sec</option>
+      <option value="20">20 sec</option>
+    </select>
+  </div>
+  <div class="warn hd" id="nowarn"></div>
+  <button class="bp" id="bgo">Start Quiz &#x270F;&#xFE0F;</button>
+</div>
+
+<div class="card hd" id="s1">
+  <div class="logo">
+    <span style="font-size:28px">&#x1F41D;</span>
+    <h1 class="title" style="font-size:24px">Spelling Bee</h1>
+  </div>
+  <div class="pt"><div class="pf" id="pbar"></div></div>
+  <p class="pl" id="ptxt"></p>
+  <div class="qb" id="qbox">
+    <span class="ri">&#x270F;&#xFE0F;</span>
+    <span class="rt">Ready when you are!</span>
+  </div>
+  <div class="cc">
+    <button class="cr" id="bprev" disabled>&#x23EE;</button>
+    <button class="crp" id="brep">&#x1F501; Repeat</button>
+    <button class="cr" id="bnxt">&#x23ED;</button>
+  </div>
+  <div class="ex">
+    <button class="sm" id="bauto">&#x25B6;&#xFE0F; Auto-play</button>
+    <button class="sm hd" id="bpaus">&#x23F8;&#xFE0F; Pause</button>
+    <button class="sm" id="bend" style="color:#e17055">&#x2715; End</button>
+  </div>
+</div>
+
+<div class="card hd tc" id="s2">
+  <div style="font-size:56px;margin-bottom:12px">&#x1F389;</div>
+  <h1 class="title" style="font-size:32px">All Done!</h1>
+  <p class="sub" style="font-size:17px;margin-bottom:24px" id="dmsg">Great job!</p>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+    <button class="bp" id="bredo" style="width:auto;padding:14px 28px;font-size:16px">&#x1F501; Try Again</button>
+    <button class="bs" id="bhome">&#x2302; Home</button>
+  </div>
+</div>
+
+<!-- Load the word list from separate file -->
+<script src="words.js"></script>
+
+<script>
+(function(){
+  // WORDS is loaded from words.js
+  if(typeof WORDS==='undefined'||!WORDS||!WORDS.length){
+    document.body.innerHTML='<div class="card tc"><h1 class="title">Error</h1><p class="sub" style="color:#e17055">Could not load words.js</p></div>';
+    return;
+  }
+
+  var W=WORDS.slice(),ci=0,au=false,tid=null,sok=false;
+  try{if(window.speechSynthesis&&typeof SpeechSynthesisUtterance==='function')sok=true;}catch(e){}
+
+  var $=function(id){return document.getElementById(id)};
+  var s0=$('s0'),s1=$('s1'),s2=$('s2');
+  var wlist=$('wlist'),wcount=$('wcount'),vsel=$('vsel'),vinfo=$('vinfo'),spd=$('spd'),spdv=$('spdv');
+  var psel=$('psel'),bgo=$('bgo'),btest=$('btest'),nowarn=$('nowarn');
+  var pbar=$('pbar'),ptxt=$('ptxt'),qbox=$('qbox');
+  var bprev=$('bprev'),brep=$('brep'),bnxt=$('bnxt');
+  var bauto=$('bauto'),bpaus=$('bpaus'),bend=$('bend');
+  var bredo=$('bredo'),bhome=$('bhome'),dmsg=$('dmsg');
+
+  // Build word list display
+  wcount.textContent="This week's words ("+WORDS.length+")";
+  var h='';
+  for(var i=0;i<WORDS.length;i++){h+='<div class="w"><b>'+(i+1)+'.</b> '+WORDS[i]+'</div>';}
+  wlist.innerHTML=h;
+
+  function show(s){s0.classList.add('hd');s1.classList.add('hd');s2.classList.add('hd');s.classList.remove('hd');}
+
+  // Voice loading with retries
+  var vr=0;
+  function loadV(){
+    if(!sok){
+      vsel.innerHTML='<option value="">(Unavailable)</option>';
+      vinfo.textContent='Speech not available here.';
+      nowarn.textContent='Open this page in Safari or Chrome for audio.';
+      nowarn.classList.remove('hd');
+      return;
+    }
+    var all=[];
+    try{all=speechSynthesis.getVoices();}catch(e){return;}
+    if(!all||all.length===0){
+      if(vr<30){vr++;setTimeout(loadV,vr<5?100:vr<15?300:1000);}
+      else{vsel.innerHTML='<option value="">(Default voice)</option>';vinfo.textContent='Using default voice.';}
+      return;
+    }
+    var en=[];
+    for(var i=0;i<all.length;i++){if(all[i].lang.indexOf('en')===0)en.push(all[i]);}
+    var list=en.length>0?en:all;
+    var prev=vsel.value;
+    vsel.innerHTML='';
+    for(var j=0;j<list.length;j++){
+      var o=document.createElement('option');
+      o.value=list[j].name;
+      o.textContent=list[j].name;
+      vsel.appendChild(o);
+    }
+    if(prev){for(var k=0;k<list.length;k++){if(list[k].name===prev){vsel.value=prev;break;}}}
+    if(!vsel.value&&list.length>0){
+      var names=['Samantha','Google US','Microsoft Zira','Google UK','Daniel','Karen','Aaron'];
+      var found=null;
+      for(var n=0;n<names.length&&!found;n++){
+        for(var m=0;m<list.length;m++){
+          if(list[m].name.indexOf(names[n])!==-1){found=list[m];break;}
+        }
+      }
+      vsel.value=found?found.name:list[0].name;
+    }
+    vinfo.textContent=list.length+' voices loaded.';
+  }
+  loadV();
+  try{speechSynthesis.addEventListener('voiceschanged',loadV);}catch(e){
+    try{speechSynthesis.onvoiceschanged=loadV;}catch(e2){}
+  }
+
+  // Speech function
+  function say(txt,cb){
+    if(!sok){if(cb)cb();return;}
+    try{speechSynthesis.cancel();}catch(e){}
+    var u=new SpeechSynthesisUtterance(txt);
+    u.rate=parseFloat(spd.value)||0.8;
+    u.pitch=1;
+    var sn=vsel.value;
+    if(sn){try{var av=speechSynthesis.getVoices();for(var i=0;i<av.length;i++){if(av[i].name===sn){u.voice=av[i];break;}}}catch(e){}}
+    u.onend=function(){setQ('r');if(cb)cb();};
+    u.onerror=function(){setQ('r');if(cb)cb();};
+    setQ('s');
+    setTimeout(function(){try{speechSynthesis.speak(u);}catch(e){setQ('r');if(cb)cb();}},50);
+  }
+
+  btest.onclick=function(){say('Testing. Spelling bee ready.');setTimeout(loadV,500);};
+
+  function setQ(m,v){
+    if(m==='s')qbox.innerHTML='<span class="qi">&#x1F50A;</span><span class="ql">Listen carefully...</span>';
+    else if(m==='c')qbox.innerHTML='<div class="cn">'+v+'</div><div class="cs">Next word in...</div>';
+    else qbox.innerHTML='<span class="ri">&#x270F;&#xFE0F;</span><span class="rt">Ready when you are!</span>';
+  }
+  function upd(){
+    pbar.style.width=((ci+1)/W.length*100)+'%';
+    ptxt.textContent='Word '+(ci+1)+' of '+W.length;
+    bprev.disabled=(ci===0);
+    bnxt.innerHTML=(ci<W.length-1)?'&#x23ED;':'&#x1F3C1;';
+  }
+  function clr(){if(tid){clearTimeout(tid);tid=null;}}
+  function abtn(){
+    if(au){bauto.classList.add('hd');bpaus.classList.remove('hd');}
+    else{bauto.classList.remove('hd');bpaus.classList.add('hd');}
+  }
+
+  // Read a word: announces number, pauses, says word, pauses, says word again
+  function sayW(i){
+    if(i<0||i>=W.length)return;
+    ci=i;upd();
+    // Use periods and commas to force natural pauses between the two readings
+    var text='Word number '+(i+1)+'. , , '+W[i]+'. , , , , '+W[i]+'.';
+    say(text,function(){
+      if(au&&i<W.length-1){
+        var s=parseInt(psel.value)||5;
+        setQ('c',s);
+        (function tick(){s--;if(s<=0){setQ('r');sayW(i+1);}else{setQ('c',s);tid=setTimeout(tick,1000);}})();
+      }else if(au&&i===W.length-1){fin();}
+    });
+  }
+
+  function fin(){
+    try{speechSynthesis.cancel();}catch(e){}
+    clr();au=false;abtn();
+    dmsg.textContent='Great job! You finished all '+W.length+' words!';
+    show(s2);
+  }
+
+  spd.oninput=function(){spdv.textContent=parseFloat(this.value).toFixed(2)+'x';};
+
+  // START: say intro first, THEN say word 1 as a separate utterance via callback
+  bgo.onclick=function(){
+    W=WORDS.slice();ci=0;au=false;abtn();
+    show(s1);upd();setQ('r');
+    setTimeout(function(){
+      say("Let's begin your spelling quiz! You have "+W.length+' words. Get ready.',function(){
+        // Pause before first word
+        setTimeout(function(){
+          sayW(0);
+        },800);
+      });
+    },400);
+  };
+
+  brep.onclick=function(){clr();say(W[ci]+'. , , , , '+W[ci]+'.');};
+  bnxt.onclick=function(){clr();au=false;abtn();if(ci<W.length-1)sayW(ci+1);else fin();};
+  bprev.onclick=function(){clr();au=false;abtn();if(ci>0)sayW(ci-1);};
+  bauto.onclick=function(){clr();au=true;abtn();sayW(ci);};
+  bpaus.onclick=function(){try{speechSynthesis.cancel();}catch(e){}clr();au=false;abtn();setQ('r');};
+  bend.onclick=function(){try{speechSynthesis.cancel();}catch(e){}clr();au=false;show(s0);};
+  bredo.onclick=function(){ci=0;au=false;abtn();show(s1);upd();setQ('r');setTimeout(function(){sayW(0);},400);};
+  bhome.onclick=function(){show(s0);};
+
+  // iOS keep-alive: prevents speech from dying after ~15s
+  setInterval(function(){
+    try{if(speechSynthesis.speaking&&!speechSynthesis.paused){speechSynthesis.pause();speechSynthesis.resume();}}catch(e){}
+  },10000);
+})();
+</script>
+</body>
+</html>
