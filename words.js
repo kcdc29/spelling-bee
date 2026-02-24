@@ -3,7 +3,7 @@
 // Add or remove kids by copying/deleting a section.
 
 var LISTS = {
-  "Kid 1": [
+  "Hannah": [
     "enter",
     "entrance",
     "winter",
@@ -30,10 +30,26 @@ var LISTS = {
     "detention"
   ],
 
-  "Kid 2": [
-    "example",
-    "words",
-    "here"
+  "Molly": [
+    "stood",
+    "proofread",
+    "shook",
+    "bloom",
+    "toothbrushes",
+    "hook",
+    "crooked",
+    "footprint",
+    "smooth",
+    "moon",
+    "spoon",
+    "cooked",
+    "choose",
+    "hood",
+    "schoolbooks",
+    "wooden",
+    "to",
+    "two",
+    "too"
   ],
 
   "Kid 3": [
