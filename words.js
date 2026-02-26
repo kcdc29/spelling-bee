@@ -52,9 +52,28 @@ var LISTS = {
     "too"
   ],
 
-  "Kid 3": [
-    "example",
-    "words",
-    "here"
+  "Max": [
+    "unique",
+    "clique",
+    "plaque",
+    "masquerade",
+    "conquer",
+    "lacquer",
+    "acquire",
+    "acquainted",
+    "adequately",
+    "colloquial",
+    "inquisitive",
+    "banquet",
+    "sequel",
+    "quizzical",
+    "quiver",
+    "questionnaire",
+    "quarantine",
+    "quench",
+    "quaint",
+    "quintuplet",
+    "restaurant",
+    "rhythm"
   ]
 };
