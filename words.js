@@ -54,7 +54,7 @@ var LISTS = {
 
   "Max": [
     "unique",
-    "clique",
+    "klēk,klik",
     "plaque",
     "masquerade",
     "conquer",
