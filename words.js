@@ -1,9 +1,6 @@
 // ✏️ UPDATE EACH WEEK
-// Replace the words for each kid below.
-// Add or remove kids by copying/deleting a section.
-
 var LISTS = {
-  "Hannah": [
+  "Kid 1": [
     "enter",
     "entrance",
     "winter",
@@ -30,7 +27,7 @@ var LISTS = {
     "detention"
   ],
 
-  "Molly": [
+  "Kid 2": [
     "stood",
     "proofread",
     "shook",
@@ -52,28 +49,36 @@ var LISTS = {
     "too"
   ],
 
-  "Max": [
+  "Kid 3": [
+    "regrettable",
+    "admitted",
+    "occurred",
+    "equipment",
+    "propeller",
+    "referring",
+    "labeling",
+    "canceled",
+    "applicant",
+    "extravagance",
+    "replaceable",
+    "outrageous",
+    "commercial",
+    "immediately",
+    "competition",
+    "impatient",
+    "official",
+    "difficult",
+    "collapse",
+    "correspondent",
+    "irresponsible",
     "unique",
-    "klēk,klik",
-    "plaque",
-    "masquerade",
     "conquer",
-    "lacquer",
-    "acquire",
     "acquainted",
-    "adequately",
-    "colloquial",
     "inquisitive",
-    "banquet",
-    "sequel",
-    "quizzical",
-    "quiver",
-    "questionnaire",
-    "quarantine",
-    "quench",
-    "quaint",
-    "quintuplet",
-    "restaurant",
-    "rhythm"
+    "enough",
+    "pamphlet",
+    "physician",
+    "atmosphere",
+    "catastrophe"
   ]
 };
