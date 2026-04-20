@@ -50,6 +50,29 @@ var LISTS = {
   ],
 
   "Kid 3": [
+    "exception",
+    "excitement",
+    "excellent",
+    "exceed",
+    "excerpt",
+    "exhausted",
+    "exhibited",
+    "exhale",
+    "examine",
+    "exasperate",
+    "exaggerate",
+    "exact",
+    "exercise",
+    "exertion",
+    "exemption",
+    "existence",
+    "exile",
+    "exit",
+    "example",
+    "executive"
+  ],
+
+  "Kid 4": [
     "regrettable",
     "admitted",
     "occurred",
